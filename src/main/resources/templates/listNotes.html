@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Note list</title>
+</head>
+<body>
+<h1>Note list</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="note : ${notes}">
+        <tr>
+            <td th:text="${note.title}"></td>
+            <td th:text="${note.content}"></td>
+            <td><a th:href="@{/note/edit(id=${note.id})}">Edit</a></td>
+            <td>
+                <form th:action="@{/note/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${note.id}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+<a href="/note/add">Add Note</a>
+</body>
+</html>
